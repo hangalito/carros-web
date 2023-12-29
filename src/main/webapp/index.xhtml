@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Carros Web</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton
+                        value="Novo" action="#{carrosBean.limpar()}" update="@form">
+                    </p:commandButton>
+
+                    <p:commandButton
+                        value="Adicionar" action="#{carrosBean.adicionar()}" update="@form">
+                    </p:commandButton>
+
+                    <p:commandButton
+                        value="Editar" action="#{carrosBean.editar()}" update="@form">
+                    </p:commandButton>
+
+                    <p:commandButton
+                        value="Excluir" action="#{carrosBean.excluir()}" update="@form">
+                        <p:confirm message="Deseja realmente excluir?" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+                        <p:commandButton value="Não" type="button" styleClass="uiconfirmdialog-no" />
+                    </p:confirmDialog>
+
+                    <p:commandButton
+                        value="Listar" action="#{carrosBean.listar()}" update="@form">
+                    </p:commandButton>
+
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <br />
+            <p:messages id="mesages" showDetail="true" closable="true"></p:messages>
+            <br />
+
+            <p:fieldset legend="Carros">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="id" />
+                    <p:inputText value="#{carrosBean.objCarro.id}" />
+                    <p:outputLabel value="Marca" />
+                    <p:inputText value="#{carrosBean.objCarro.marca}" />
+                    <p:outputLabel value="Modelo" />
+                    <p:inputText value="#{carrosBean.objCarro.modelo}" />
+                    <p:outputLabel value="Cor" />
+                    <p:inputText value="#{carrosBean.objCarro.cor}"/>
+                    <p:outputLabel value="Ano"/>
+                    <p:inputMask mask="9999" value="#{carrosBean.objCarro.ano}"/>
+                </p:panelGrid>
+            </p:fieldset>
+
+            <br/>
+            <p:fieldset legend="Lista de Carros Cadastrados">
+                <p:dataTable value="#{carrosBean.listaCarro}" var="carroWeb">
+                    <p:column headerText="id" sortBy ="#{carrosBean.objCarro.id}">
+                        <h:outputText value="#{carrosBean.objCarro.id}"/>
+                    </p:column>
+                    <p:column headerText="Marca" sortBy ="#{carrosBean.objCarro.marca}">
+                        <h:outputText value="#{carrosBean.objCarro.marca}"/>
+                    </p:column>
+                    <p:column headerText="Modelo" sortBy ="#{carrosBean.objCarro.modelo}">
+                        <h:outputText value="#{carrosBean.objCarro.modelo}"/>
+                    </p:column>
+                    <p:column headerText="Cor" sortBy ="#{carrosBean.objCarro.cor}">
+                        <h:outputText value="#{carrosBean.objCarro.cor}"/>
+                    </p:column>
+                    <p:column headerText="Ano" sortBy ="#{carrosBean.objCarro.ano}">
+                        <h:outputText value="#{carrosBean.objCarro.ano}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Selecionar"
+                                         action="#{carrosBean.selecionar(carroWeb)}"
+                                         update="@form">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
